@@ -9,5 +9,16 @@ public class SubscribeMsg extends Message {
 
 	// Constructor, get/set-methods, and toString method
 	// as described in the project text
-		
+
+    private String m_topic;
+
+    public SubscribeMsg(String user, String topic)
+    {
+        super(MessageType.SUBSCRIBE, user);
+    }
+
+    public String topic() {
+        return m_topic;
+    }
+
 }

@@ -22,7 +22,11 @@ public class MessageUtils {
 		Message message = null;
 		
 		switch (type) {
-		
+
+		case STATUS:
+			message = gson.fromJson(json, StatusMessage.class);
+			break;
+
 		case CONNECT:
 			message = gson.fromJson(json, ConnectMsg.class);
 			break;
