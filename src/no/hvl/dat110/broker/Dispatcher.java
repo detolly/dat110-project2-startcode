@@ -145,12 +145,14 @@ public class Dispatcher extends Stopable {
 
 		Collection<ClientSession> sessions = storage.getSessions();
 
-		for(ClientSession s : sessions)
-		{
-			if (s.getUser() != user)
-				s.send(new StatusMessage(user, topic, msg.message()));
-		}
-
+		Set<String> users_in_topic = storage.subscriptions.get(topic);
+		if (users_in_topic != null)
+			for (String user2 : users_in_topic)
+			{
+				ClientSession cur = storage.clients.get(user2);
+				if (cur != null)
+					storage.clients.get(user2).send(new StatusMessage(user, topic, msg.message()));
+			}
 
 	}
 }
